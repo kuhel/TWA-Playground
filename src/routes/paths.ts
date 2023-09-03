@@ -3,6 +3,5 @@ interface Paths {
 }
 
 export default {
-   HOME: '/',
-   NOT_FOUND: '*',
+   HOME: '*',
 } as Paths;
