@@ -73,7 +73,7 @@ const TabContentAppearance = () => {
       createData(
          'hint_color',
          '#ffffff',
-         valueTextColor,
+         WebApp.themeParams.hint_color,
          WebApp.themeParams.hint_color,
          'https://core.telegram.org/bots/webapps#themeparams',
          (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['hint_color']),
@@ -81,7 +81,7 @@ const TabContentAppearance = () => {
       createData(
          'link_color',
          '#ffffff',
-         valueTextColor,
+         WebApp.themeParams.link_color,
          WebApp.themeParams.link_color,
          'https://core.telegram.org/bots/webapps#themeparams',
          (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['link_color']),
@@ -89,7 +89,7 @@ const TabContentAppearance = () => {
       createData(
          'button_color',
          '#ffffff',
-         valueTextColor,
+         WebApp.themeParams.button_color,
          WebApp.themeParams.button_color,
          'https://core.telegram.org/bots/webapps#themeparams',
          (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['button_color']),
@@ -97,7 +97,7 @@ const TabContentAppearance = () => {
       createData(
          'button_text_color',
          '#ffffff',
-         valueTextColor,
+         WebApp.themeParams.button_text_color,
          WebApp.themeParams.button_text_color,
          'https://core.telegram.org/bots/webapps#themeparams',
          (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['button_text_color']),
