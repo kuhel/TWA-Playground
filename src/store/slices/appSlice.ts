@@ -6,10 +6,16 @@ export enum Theme {
 }
 
 export enum TabName {
-   Account = 'account',
-   Appearance = 'appearance',
-   Team = 'team',
-   Plan = 'plan',
+   Appearance = 'Appearance',
+   Team = 'Team',
+   Plan = 'Plan',
+   Buttons = 'Buttons',
+   Haptic = 'Haptic',
+   App_Data = 'App Data',
+   User_Data = 'User Data',
+   Chat_Data = 'Chat Data',
+   Events = 'Events',
+   Security = 'Security',
 }
 
 export enum Language {
@@ -26,7 +32,7 @@ export interface AppState {
 const INITIAL_STATE = {
    theme: Theme.Light,
    language: Language.EN,
-   tab: TabName.Account,
+   tab: TabName.Appearance,
 } as AppState;
 
 const appSlice = createSlice({

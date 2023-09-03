@@ -7,7 +7,7 @@ interface Colors {
 
 export default {
    [Theme.Light]: {
-      '--bg-color': '#fff',
+      '--bg-color': 'rgb(245, 247, 250)',
       '--regular-text': '#000',
    },
    [Theme.Dark]: {

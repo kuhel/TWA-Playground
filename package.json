@@ -13,7 +13,9 @@
       "@emotion/react": "^11.11.1",
       "@emotion/styled": "^11.11.0",
       "@fontsource/inter": "^5.0.8",
+      "@mui/icons-material": "^5.14.7",
       "@mui/joy": "^5.0.0-beta.4",
+      "@mui/material": "^5.14.7",
       "@reduxjs/toolkit": "^1.9.1",
       "@twa-dev/sdk": "^6.7.1",
       "@vitejs/plugin-basic-ssl": "^1.0.1",
@@ -47,7 +49,7 @@
       "vite-tsconfig-paths": "^4.0.3"
    },
    "lint-staged": {
-      "**/*.{js,jsx,ts,tsx}": [
+      "src/*.{js,jsx,ts,tsx}": [
          "npx eslint --fix",
          "npx prettier --write"
       ]

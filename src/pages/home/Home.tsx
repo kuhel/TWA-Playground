@@ -2,45 +2,28 @@ import { useEffect } from 'react';
 
 import i18n from 'common/language/i18n';
 
-import useGetPosts from 'hooks/useGetPosts';
-import useLanguage from 'hooks/useLanguage';
 import useTheme from 'hooks/useTheme';
-import useTab from 'hooks/useTab';
 
-import { Language, TabName } from 'store/slices/appSlice';
+import { TabName } from 'store/slices/appSlice';
 
 import Box from '@mui/joy/Box';
 import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
 import Tab, { tabClasses } from '@mui/joy/Tab';
 import TabPanel from '@mui/joy/TabPanel';
-import Button from '@mui/joy/Button';
 import Typography from '@mui/joy/Typography';
 
 import SampleTabBlock from 'components/sample-tab-block/SampleTabBlock';
 import TabContentAppearance from 'components/tab-content-appearance/TabContentAppearance';
 
-import WebApp from '@twa-dev/sdk'
+import WebApp from '@twa-dev/sdk';
 
 const Home = () => {
-   const { setCurrentLanguage } = useLanguage();
-   const { getPosts } = useGetPosts();
    const { toggleTheme } = useTheme();
-   const { tab, setCurrentTab } = useTab();
 
    useEffect(() => {
-      getPosts();
       WebApp.ready();
-   }, [getPosts]);
-
-   const setLanguageToTurkish = () => {
-      setCurrentLanguage(Language.TR);
-   };
-
-   const setTab = (tabName: TabName) => {
-      setCurrentTab(tabName);
-      console.log(tabName);
-   };
+   }, []);
 
    return (
       <Box>
@@ -49,40 +32,86 @@ const Home = () => {
          </Typography>
          <Tabs aria-label="tabs" defaultValue={TabName.Appearance} sx={{ bgcolor: 'transparent' }}>
             <TabList
-               disableUnderline
-               sx={{
-                  p: 0.5,
-                  gap: 0.5,
-                  borderRadius: 'xl',
-                  bgcolor: 'background.level1',
-                  [`& .${tabClasses.root}[aria-selected="true"]`]: {
-                     boxShadow: 'sm',
-                     bgcolor: 'background.surface',
+               sticky="top"
+               variant="plain"
+               sx={(theme) => ({
+                  '--ListItem-minHeight': '48px',
+                  top: 'calc(-1 * (var(--main-paddingTop, 0px) - var(--Header-height, 0px)))',
+                  zIndex: 10,
+                  width: '100%',
+                  overflow: 'auto hidden',
+                  alignSelf: 'flex-start',
+                  scrollSnapType: 'inline',
+                  '&::after': {
+                     pointerEvents: 'none',
+                     display: { xs: 'block', sm: 'none' },
+                     content: '""',
+                     position: 'absolute',
+                     top: 0,
+                     width: 40,
+                     flex: 'none',
+                     zIndex: 1,
+                     right: 0,
+                     borderBottom: '1px solid transparent',
+                     background: `linear-gradient(to left, ${theme.vars.palette.background.body}, rgb(0 0 0 / 0))`,
+                     backgroundClip: 'content-box',
                   },
-               }}
+                  '&::-webkit-scrollbar': {
+                     width: 0,
+                     display: 'none',
+                  },
+                  [`& .${tabClasses.root}`]: {
+                     '--focus-outline-offset': '-2px',
+                     paddingLeft: '10px',
+                     paddingRight: '10px',
+                     '&:first-of-type': {
+                        ml: 'calc(-10px)',
+                     },
+                     scrollSnapAlign: 'start',
+                     bgcolor: 'transparent',
+                     flex: 'none',
+                     '&:hover': {
+                        bgcolor: 'transparent',
+                     },
+                     [`&.${tabClasses.selected}`]: {
+                        color: 'primary.plainColor',
+                        bgcolor: 'transparent',
+                        borderBottom: `1px solid ${theme.vars.palette.primary[500]}`,
+                     },
+                  },
+               })}
             >
-               <Tab disableIndicator value={TabName.Appearance}>{TabName.Appearance}</Tab>
-               <Tab disableIndicator value={TabName.Plan}>Popups</Tab>
-               <Tab disableIndicator value={TabName.Team}>Buttons</Tab>
-               <Tab disableIndicator value={TabName.Team}>Haptic</Tab>
-               <Tab disableIndicator value={TabName.Team}>App Data</Tab>
-               <Tab disableIndicator value={TabName.Team}>User Data</Tab>
-               <Tab disableIndicator value={TabName.Team}>Chat Data</Tab>
-               <Tab disableIndicator value={TabName.Team}>Events</Tab>
-               <Tab disableIndicator value={TabName.Team}>Security</Tab>
+               <Tab disableIndicator value={TabName.Appearance}>
+                  {TabName.Appearance}
+               </Tab>
+               <Tab disableIndicator value={TabName.Plan}>
+                  Popups
+               </Tab>
+               <Tab disableIndicator value={TabName.Buttons}>
+                  Buttons
+               </Tab>
+               <Tab disableIndicator value={TabName.Haptic}>
+                  Haptic
+               </Tab>
+               <Tab disableIndicator value={TabName.App_Data}>
+                  App Data
+               </Tab>
+               <Tab disableIndicator value={TabName.User_Data}>
+                  User Data
+               </Tab>
+               <Tab disableIndicator value={TabName.Chat_Data}>
+                  Chat Data
+               </Tab>
+               <Tab disableIndicator value={TabName.Events}>
+                  Events
+               </Tab>
+               <Tab disableIndicator value={TabName.Security}>
+                  Security
+               </Tab>
             </TabList>
             <SampleTabBlock value={TabName.Appearance}>
-               <TabContentAppearance/ >
+               <TabContentAppearance />
             </SampleTabBlock>
-            <TabPanel value={TabName.Account}>
-               <Box>
-                  <Typography level='h2'>
-                     {tab}
-                  </Typography>
-                  <Button variant="solid" onClick={setLanguageToTurkish}>Set Language to Turkish</Button>
-                  <Button variant="solid" onClick={toggleTheme}>Toggle Theme</Button>
-               </Box>
-            </TabPanel>
             <SampleTabBlock value={TabName.Plan}>
                <b>Plan</b> tab panel
             </SampleTabBlock>
