@@ -20,7 +20,7 @@ import Typography from '@mui/joy/Typography';
 import SampleTabBlock from 'components/sample-tab-block/SampleTabBlock';
 import TabContentAppearance from 'components/tab-content-appearance/TabContentAppearance';
 
-
+import WebApp from '@twa-dev/sdk'
 
 const Home = () => {
    const { setCurrentLanguage } = useLanguage();
@@ -30,6 +30,7 @@ const Home = () => {
 
    useEffect(() => {
       getPosts();
+      WebApp.ready();
    }, [getPosts]);
 
    const setLanguageToTurkish = () => {
