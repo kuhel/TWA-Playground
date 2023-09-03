@@ -5,5 +5,8 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
    plugins: [react(), tsconfigPaths(), basicSsl()],
+   build: {
+      outDir: './docs'
+   },
    base: '/TWA-Playground/'
 });
