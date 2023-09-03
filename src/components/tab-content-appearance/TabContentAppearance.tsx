@@ -57,18 +57,16 @@ const TabContentAppearance = () => {
       createData(
          'secondary_bg_color',
          '#ffffff',
-         valueTextColor,
+         WebApp.themeParams.secondary_bg_color,
          WebApp.themeParams.secondary_bg_color,
          'https://core.telegram.org/bots/webapps#themeparams',
-         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['secondary_bg_color']),
       ),
       createData(
          'text_color',
          '#ffffff',
-         valueTextColor,
+         WebApp.themeParams.text_color,
          WebApp.themeParams.text_color,
          'https://core.telegram.org/bots/webapps#themeparams',
-         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['text_color']),
       ),
       createData(
          'hint_color',
@@ -76,7 +74,6 @@ const TabContentAppearance = () => {
          WebApp.themeParams.hint_color,
          WebApp.themeParams.hint_color,
          'https://core.telegram.org/bots/webapps#themeparams',
-         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['hint_color']),
       ),
       createData(
          'link_color',
@@ -84,7 +81,6 @@ const TabContentAppearance = () => {
          WebApp.themeParams.link_color,
          WebApp.themeParams.link_color,
          'https://core.telegram.org/bots/webapps#themeparams',
-         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['link_color']),
       ),
       createData(
          'button_color',
@@ -92,7 +88,6 @@ const TabContentAppearance = () => {
          WebApp.themeParams.button_color,
          WebApp.themeParams.button_color,
          'https://core.telegram.org/bots/webapps#themeparams',
-         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['button_color']),
       ),
       createData(
          'button_text_color',
@@ -100,7 +95,6 @@ const TabContentAppearance = () => {
          WebApp.themeParams.button_text_color,
          WebApp.themeParams.button_text_color,
          'https://core.telegram.org/bots/webapps#themeparams',
-         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['button_text_color']),
       )
     ];
 
@@ -120,7 +114,7 @@ const TabContentAppearance = () => {
                      <FormControl sx={{ flex: 1 }}>
                         <FormLabel sx={{ display: { sm: 'none' } }}>
                            <Typography level="h4" textAlign="left">
-                              headerColor
+                              header_color
                            </Typography>
                         </FormLabel>
                         <Select defaultValue="bg_color" onChange={(e, newValue) => {
@@ -164,11 +158,15 @@ const TabContentAppearance = () => {
                         startDecorator={<CodeIcon />}
                         value={row.value}
                         onChange={(event) => {
-                           row.changeAction(event);
+                           if (typeof row.changeAction !== 'undefined')
+                           {
+                              row.changeAction(event);
+                           }
                         }}
                         endDecorator={typeof row.btnAction !== 'undefined' ? <Button onClick={() => row.btnAction()}>Change</Button> : null}
                         placeholder={row.placeholder}
                         defaultValue={row.defaultValue}
+                        disabled={typeof row.changeAction === 'undefined'}
                      />
                   </FormControl>
                   <Link
