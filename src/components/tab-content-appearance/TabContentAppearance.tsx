@@ -8,6 +8,8 @@ import FormControl from '@mui/joy/FormControl';
 import Input from '@mui/joy/Input';
 import Divider from '@mui/joy/Divider';
 import Button from '@mui/joy/Button';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
 
 import Launch from '@mui/icons-material/Launch';
 import CodeIcon from '@mui/icons-material/Code';
@@ -24,69 +26,163 @@ interface ThemeParams {
    button_text_color: `#${string}`;
 }
 
+function createData(
+   propertyTitle: string,
+   placeholder: string,
+   value: any,
+   defaultValue: any,
+   docLink: string,
+   changeAction?: any,
+   btnAction?: any,
+   extraProps?: object,
+ ) {
+   return { propertyTitle, btnAction, changeAction, placeholder, value, defaultValue, docLink, extraProps };
+}
+
 const TabContentAppearance = () => {
    const [valueBgColor, setBgColorValue] = useState(WebApp.themeParams.bg_color);
    const [valueTextColor, setTextColorValue] = useState(WebApp.themeParams.text_color);
 
+
+   const DocData = [
+      createData(
+         'bg_color',
+         '#ffffff',
+         valueBgColor,
+         WebApp.themeParams.bg_color,
+         'https://core.telegram.org/bots/webapps#themeparams',
+         (event: { target: { value: string; } }) => setBgColorValue(event.target.value as ThemeParams['bg_color']),
+         () => WebApp.setBackgroundColor(valueBgColor),
+      ),
+      createData(
+         'secondary_bg_color',
+         '#ffffff',
+         valueTextColor,
+         WebApp.themeParams.secondary_bg_color,
+         'https://core.telegram.org/bots/webapps#themeparams',
+         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['secondary_bg_color']),
+      ),
+      createData(
+         'text_color',
+         '#ffffff',
+         valueTextColor,
+         WebApp.themeParams.text_color,
+         'https://core.telegram.org/bots/webapps#themeparams',
+         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['text_color']),
+      ),
+      createData(
+         'hint_color',
+         '#ffffff',
+         valueTextColor,
+         WebApp.themeParams.hint_color,
+         'https://core.telegram.org/bots/webapps#themeparams',
+         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['hint_color']),
+      ),
+      createData(
+         'link_color',
+         '#ffffff',
+         valueTextColor,
+         WebApp.themeParams.link_color,
+         'https://core.telegram.org/bots/webapps#themeparams',
+         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['link_color']),
+      ),
+      createData(
+         'button_color',
+         '#ffffff',
+         valueTextColor,
+         WebApp.themeParams.button_color,
+         'https://core.telegram.org/bots/webapps#themeparams',
+         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['button_color']),
+      ),
+      createData(
+         'button_text_color',
+         '#ffffff',
+         valueTextColor,
+         WebApp.themeParams.button_text_color,
+         'https://core.telegram.org/bots/webapps#themeparams',
+         (event: { target: { value: string; } }) => setTextColorValue(event.target.value as ThemeParams['button_text_color']),
+      )
+    ];
+
    return (
       <Box sx={{ width: '100%' }}>
-         <Typography level="h3" textAlign="left" sx={{ pb: 2 }}>
+         <Typography level="h1" textAlign="left" sx={{ pb: 2 }}>
             Appearance
          </Typography>
-         <FormLabel sx={{ display: { xs: 'none', sm: 'block' } }}>bg_color</FormLabel>
-         <Box sx={{ display: { xs: 'contents', sm: 'flex' }, gap: 2 }}>
-            <FormControl sx={{ flex: 1 }}>
-               <FormLabel sx={{ display: { sm: 'none' } }}>bg_color</FormLabel>
-               <Input
-                  startDecorator={<CodeIcon />}
-                  value={valueBgColor}
-                  onChange={({ target: { value } }) =>
-                     setBgColorValue(value as ThemeParams['bg_color'])
-                  }
-                  endDecorator={
-                     <Button onClick={() => WebApp.setBackgroundColor(valueBgColor)}>Change</Button>
-                  }
-                  placeholder="#ffffff"
-                  defaultValue={WebApp.themeParams.bg_color}
-               />
-            </FormControl>
-            <Link
-               href="https://core.telegram.org/bots/webapps#themeparams"
-               startDecorator={<Launch fontSize="inherit" />}
-               sx={{ mt: 1.5, mb: 1 }}
-               level="body-sm"
-               underline="always"
-            >
-               Doc
-            </Link>
-         </Box>
-         <Divider role="presentation" sx={{ mt: 1, mb: 1 }} />
-
-         <FormLabel sx={{ display: { xs: 'none', sm: 'block' } }}>text_color</FormLabel>
-         <Box sx={{ display: { xs: 'contents', sm: 'flex' }, gap: 2 }}>
-            <FormControl sx={{ flex: 1 }}>
-               <FormLabel sx={{ display: { sm: 'none' } }}>text_color</FormLabel>
-               <Input
-                  startDecorator={<CodeIcon />}
-                  value={valueTextColor}
-                  onChange={({ target: { value } }) =>
-                     setTextColorValue(value as ThemeParams['text_color'])
-                  }
-                  placeholder="#ffffff"
-                  defaultValue={WebApp.themeParams.bg_color}
-               />
-            </FormControl>
-            <Link
-               href="https://core.telegram.org/bots/webapps#themeparams"
-               startDecorator={<Launch fontSize="inherit" />}
-               sx={{ mt: 1.5, mb: 1 }}
-               level="body-sm"
-               underline="always"
-            >
-               Doc
-            </Link>
-         </Box>
-         <Divider role="presentation" sx={{ mt: 1, mb: 1 }} />
+            <Box>
+                  <Divider role="presentation" sx={{ mt: 1, mb: 1 }} />
+                  <FormLabel sx={{ display: { xs: 'none', sm: 'block' } }}>
+                     <Typography level="h4" textAlign="left">
+                        header_color
+                     </Typography>
+                  </FormLabel>
+                  <Box sx={{ display: { xs: 'contents', sm: 'flex' }, gap: 2 }}>
+                     <FormControl sx={{ flex: 1 }}>
+                        <FormLabel sx={{ display: { sm: 'none' } }}>
+                           <Typography level="h4" textAlign="left">
+                              headerColor
+                           </Typography>
+                        </FormLabel>
+                        <Select defaultValue="bg_color" onChange={(e, newValue) => {
+                           if (newValue === 'secondary_bg_color') {
+                              WebApp.setHeaderColor(WebApp.themeParams.secondary_bg_color);
+                           } else {
+                              WebApp.setHeaderColor(WebApp.themeParams.bg_color);
+                           }
+                        }}>
+                           <Option value="bg_color">bg_color</Option>
+                           <Option value="secondary_bg_color">secondary_bg_color</Option>
+                        </Select>
+                     </FormControl>
+                     <Link
+                        href='https://core.telegram.org/bots/webapps#themeparams'
+                        startDecorator={<Launch fontSize="inherit" />}
+                        sx={{ mt: 1.5, mb: 1 }}
+                        level="body-sm"
+                        underline="always"
+                     >
+                        Doc
+                     </Link>
+                  </Box>
+               </Box>
+         {DocData.map((row) => (
+            <Box key={row.propertyTitle}>
+               <Divider role="presentation" sx={{ mt: 1, mb: 1 }} />
+               <FormLabel sx={{ display: { xs: 'none', sm: 'block' } }}>
+                  <Typography level="h4" textAlign="left">
+                     {row.propertyTitle}
+                  </Typography>
+               </FormLabel>
+               <Box sx={{ display: { xs: 'contents', sm: 'flex' }, gap: 2 }}>
+                  <FormControl sx={{ flex: 1 }}>
+                     <FormLabel sx={{ display: { sm: 'none' } }}>
+                        <Typography level="h4" textAlign="left">
+                           {row.propertyTitle}
+                        </Typography>
+                     </FormLabel>
+                     <Input
+                        startDecorator={<CodeIcon />}
+                        value={row.value}
+                        onChange={(event) => {
+                           row.changeAction(event);
+                        }}
+                        endDecorator={typeof row.btnAction !== 'undefined' ? <Button onClick={() => row.btnAction()}>Change</Button> : null}
+                        placeholder={row.placeholder}
+                        defaultValue={row.defaultValue}
+                     />
+                  </FormControl>
+                  <Link
+                     href={row.docLink}
+                     startDecorator={<Launch fontSize="inherit" />}
+                     sx={{ mt: 1.5, mb: 1 }}
+                     level="body-sm"
+                     underline="always"
+                  >
+                     Doc
+                  </Link>
+               </Box>
+            </Box>
+         ))}
       </Box>
    );
 };
