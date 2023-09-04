@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import Box from '@mui/joy/Box';
-import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import FormLabel from '@mui/joy/FormLabel';
 import FormControl from '@mui/joy/FormControl';
@@ -31,12 +30,13 @@ function createData(
    placeholder: string,
    value: any,
    defaultValue: any,
+   apiName: string,
    docLink: string,
    changeAction?: any,
    btnAction?: any,
    extraProps?: object,
  ) {
-   return { propertyTitle, btnAction, changeAction, placeholder, value, defaultValue, docLink, extraProps };
+   return { propertyTitle, btnAction, changeAction, placeholder, value, defaultValue, apiName, docLink, extraProps };
 }
 
 const TabContentAppearance = () => {
@@ -50,6 +50,7 @@ const TabContentAppearance = () => {
          '#ffffff',
          valueBgColor,
          WebApp.themeParams.bg_color,
+         'themeParams.bg_color',
          'https://core.telegram.org/bots/webapps#themeparams',
          (event: { target: { value: string; } }) => setBgColorValue(event.target.value as ThemeParams['bg_color']),
          () => WebApp.setBackgroundColor(valueBgColor),
@@ -59,6 +60,7 @@ const TabContentAppearance = () => {
          '#ffffff',
          WebApp.themeParams.secondary_bg_color,
          WebApp.themeParams.secondary_bg_color,
+         'themeParams.secondary_bg_color',
          'https://core.telegram.org/bots/webapps#themeparams',
       ),
       createData(
@@ -66,6 +68,7 @@ const TabContentAppearance = () => {
          '#ffffff',
          WebApp.themeParams.text_color,
          WebApp.themeParams.text_color,
+         'themeParams.text_color',
          'https://core.telegram.org/bots/webapps#themeparams',
       ),
       createData(
@@ -73,6 +76,7 @@ const TabContentAppearance = () => {
          '#ffffff',
          WebApp.themeParams.hint_color,
          WebApp.themeParams.hint_color,
+         'themeParams.hint_color',
          'https://core.telegram.org/bots/webapps#themeparams',
       ),
       createData(
@@ -80,6 +84,7 @@ const TabContentAppearance = () => {
          '#ffffff',
          WebApp.themeParams.link_color,
          WebApp.themeParams.link_color,
+         'themeParams.link_color',
          'https://core.telegram.org/bots/webapps#themeparams',
       ),
       createData(
@@ -87,6 +92,7 @@ const TabContentAppearance = () => {
          '#ffffff',
          WebApp.themeParams.button_color,
          WebApp.themeParams.button_color,
+         'themeParams.button_color',
          'https://core.telegram.org/bots/webapps#themeparams',
       ),
       createData(
@@ -94,6 +100,7 @@ const TabContentAppearance = () => {
          '#ffffff',
          WebApp.themeParams.button_text_color,
          WebApp.themeParams.button_text_color,
+         'themeParams.button_text_color',
          'https://core.telegram.org/bots/webapps#themeparams',
       )
     ];
@@ -128,59 +135,63 @@ const TabContentAppearance = () => {
                            <Option value="secondary_bg_color">secondary_bg_color</Option>
                         </Select>
                      </FormControl>
-                     <Link
-                        href='https://core.telegram.org/bots/webapps#themeparams'
+                     <Button
+                        onClick={() => WebApp.openLink('https://core.telegram.org/bots/webapps#themeparams')}
                         startDecorator={<Launch fontSize="inherit" />}
-                        sx={{ mt: 1.5, mb: 1 }}
-                        level="body-sm"
-                        underline="always"
+                        variant='plain'
+                        size='sm'
+                        sx={{ mt: .5, ml: -1.5, fontWeight: 400 }}
                      >
-                        Doc
-                     </Link>
+                        themeParams.bg_color
+                     </Button>
                   </Box>
                </Box>
-         {DocData.map((row) => (
-            <Box key={row.propertyTitle}>
-               <Divider role="presentation" sx={{ mt: 1, mb: 1 }} />
-               <FormLabel sx={{ display: { xs: 'none', sm: 'block' } }}>
-                  <Typography level="h4" textAlign="left">
-                     {row.propertyTitle}
-                  </Typography>
-               </FormLabel>
-               <Box sx={{ display: { xs: 'contents', sm: 'flex' }, gap: 2 }}>
-                  <FormControl sx={{ flex: 1 }}>
-                     <FormLabel sx={{ display: { sm: 'none' } }}>
-                        <Typography level="h4" textAlign="left">
-                           {row.propertyTitle}
-                        </Typography>
-                     </FormLabel>
-                     <Input
-                        startDecorator={<CodeIcon />}
-                        value={row.value}
-                        onChange={(event) => {
-                           if (typeof row.changeAction !== 'undefined')
-                           {
-                              row.changeAction(event);
-                           }
-                        }}
-                        endDecorator={typeof row.btnAction !== 'undefined' ? <Button onClick={() => row.btnAction()}>Change</Button> : null}
-                        placeholder={row.placeholder}
-                        defaultValue={row.defaultValue}
-                        disabled={typeof row.changeAction === 'undefined'}
-                     />
-                  </FormControl>
-                  <Link
-                     href={row.docLink}
-                     startDecorator={<Launch fontSize="inherit" />}
-                     sx={{ mt: 1.5, mb: 1 }}
-                     level="body-sm"
-                     underline="always"
-                  >
-                     Doc
-                  </Link>
+         {DocData.map((row) => {
+            const hasChangeAction = typeof row.changeAction !== 'undefined';
+            return (
+               <Box key={row.propertyTitle}>
+                  <Divider role="presentation" sx={{ mt: 1, mb: 1 }} />
+                  <FormLabel sx={{ display: { xs: 'none', sm: 'block' } }}>
+                     <Typography level="h4" textAlign="left">
+                        {row.propertyTitle}
+                     </Typography>
+                  </FormLabel>
+                  <Box sx={{ display: { xs: 'contents', sm: 'flex' }, gap: 2 }}>
+                     <FormControl sx={{ flex: 1 }}>
+                        <FormLabel sx={{ display: { sm: 'none' } }}>
+                           <Typography level="h4" textAlign="left">
+                              {row.propertyTitle}
+                           </Typography>
+                        </FormLabel>
+                        <Input
+                           startDecorator={<CodeIcon />}
+                           value={row.value}
+                           onChange={(event) => {
+                              if (hasChangeAction)
+                              {
+                                 row.changeAction(event);
+                              }
+                           }}
+                           endDecorator={typeof row.btnAction !== 'undefined' ? <Button onClick={() => row.btnAction()}>Change</Button> : null}
+                           placeholder={row.placeholder}
+                           defaultValue={row.defaultValue}
+                           disabled={!hasChangeAction}
+                           variant={hasChangeAction ? 'outlined' : 'solid'}
+                        />
+                     </FormControl>
+                     <Button
+                        onClick={() => WebApp.openLink(row.docLink)}
+                        startDecorator={<Launch fontSize="inherit" />}
+                        variant='plain'
+                        size='sm'
+                        sx={{ mt: .5, ml: -1.5, fontWeight: 400 }}
+                     >
+                        {row.apiName}
+                     </Button>
+                  </Box>
                </Box>
-            </Box>
-         ))}
+            );
+         })}
       </Box>
    );
 };
