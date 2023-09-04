@@ -8,7 +8,7 @@ export enum Theme {
 export enum TabName {
    Appearance = 'Appearance',
    Team = 'Team',
-   Plan = 'Plan',
+   Popup = 'Popup',
    Buttons = 'Buttons',
    Haptic = 'Haptic',
    App_Data = 'App Data',

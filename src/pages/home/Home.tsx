@@ -15,6 +15,7 @@ import Typography from '@mui/joy/Typography';
 
 import SampleTabBlock from 'components/sample-tab-block/SampleTabBlock';
 import TabContentAppearance from 'components/tab-content-appearance/TabContentAppearance';
+import TabContentPopUp from 'components/tab-content-popup/TabContentPopUp';
 
 import WebApp from '@twa-dev/sdk';
 
@@ -84,7 +85,7 @@ const Home = () => {
                <Tab disableIndicator value={TabName.Appearance}>
                   {TabName.Appearance}
                </Tab>
-               <Tab disableIndicator value={TabName.Plan}>
+               <Tab disableIndicator value={TabName.Popup}>
                   Popups
                </Tab>
                <Tab disableIndicator value={TabName.Buttons}>
@@ -112,8 +113,8 @@ const Home = () => {
             <SampleTabBlock value={TabName.Appearance}>
                <TabContentAppearance />
             </SampleTabBlock>
-            <SampleTabBlock value={TabName.Plan}>
-               <b>Plan</b> tab panel
+            <SampleTabBlock value={TabName.Popup}>
+              <TabContentPopUp />
             </SampleTabBlock>
             <TabPanel value={TabName.Team}>
                <b>Team</b> tab panel
