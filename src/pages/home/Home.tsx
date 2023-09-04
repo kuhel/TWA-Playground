@@ -16,6 +16,7 @@ import Typography from '@mui/joy/Typography';
 import SampleTabBlock from 'components/sample-tab-block/SampleTabBlock';
 import TabContentAppearance from 'components/tab-content-appearance/TabContentAppearance';
 import TabContentPopUp from 'components/tab-content-popup/TabContentPopUp';
+import TabContentAppData from 'components/tab-content-app-data/TabContentAppData';
 
 import WebApp from '@twa-dev/sdk';
 
@@ -86,16 +87,16 @@ const Home = () => {
                   {TabName.Appearance}
                </Tab>
                <Tab disableIndicator value={TabName.Popup}>
-                  Popups
+                   {TabName.Popup}
                </Tab>
+                <Tab disableIndicator value={TabName.App_Data}>
+                    {TabName.App_Data}
+                </Tab>
                <Tab disableIndicator value={TabName.Buttons}>
                   Buttons
                </Tab>
                <Tab disableIndicator value={TabName.Haptic}>
                   Haptic
-               </Tab>
-               <Tab disableIndicator value={TabName.App_Data}>
-                  App Data
                </Tab>
                <Tab disableIndicator value={TabName.User_Data}>
                   User Data
@@ -116,8 +117,8 @@ const Home = () => {
             <SampleTabBlock value={TabName.Popup}>
               <TabContentPopUp />
             </SampleTabBlock>
-            <TabPanel value={TabName.Team}>
-               <b>Team</b> tab panel
+            <TabPanel value={TabName.App_Data}>
+                <TabContentAppData />
             </TabPanel>
          </Tabs>
       </Box>
