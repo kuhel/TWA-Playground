@@ -8,6 +8,8 @@ import Typography from '@mui/joy/Typography';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 
 import WebApp from '@twa-dev/sdk';
+import Launch from "@mui/icons-material/Launch";
+import Button from "@mui/joy/Button";
 
 const InitData = () => {
     const [open, setOpen] = useState(true);
@@ -36,9 +38,17 @@ const InitData = () => {
         <Box
             sx={{
                 width: 320,
-                pl: '24px',
             }}
         >
+            <Button
+                onClick={() => WebApp.openLink('https://core.telegram.org/bots/webapps#webappinitdata')}
+                startDecorator={<Launch fontSize="inherit" />}
+                variant='plain'
+                size='sm'
+                sx={{ mt: .5, ml: -1.5, fontWeight: 400, justifyContent: 'flex-start' }}
+            >
+                WebAppInitData
+            </Button>
             <List
                 size="sm"
                 sx={(theme) => ({

@@ -19,6 +19,8 @@ import TabContentPopUp from 'components/tab-content-popup/TabContentPopUp';
 import TabContentAppData from 'components/tab-content-app-data/TabContentAppData';
 
 import WebApp from '@twa-dev/sdk';
+import TabContentHaptic from "../../components/tab-content-buttons/TabContentHaptic";
+import TabContentButtons from "../../components/tab-content-haptic/TabContentButtons";
 
 const Home = () => {
    const { toggleTheme } = useTheme();
@@ -29,10 +31,7 @@ const Home = () => {
 
    return (
       <Box>
-         <Typography level="h4" component="h1">
-            {i18n.t('greeting')}
-         </Typography>
-         <Tabs aria-label="tabs" defaultValue={TabName.Appearance} sx={{ bgcolor: 'transparent' }}>
+         <Tabs aria-label="tabs" defaultValue={TabName.Buttons} sx={{ bgcolor: 'transparent' }}>
             <TabList
                sticky="top"
                variant="plain"
@@ -83,18 +82,18 @@ const Home = () => {
                   },
                })}
             >
+                <Tab disableIndicator value={TabName.Buttons}>
+                    Buttons
+                </Tab>
+                <Tab disableIndicator value={TabName.Popup}>
+                    {TabName.Popup}
+                </Tab>
                <Tab disableIndicator value={TabName.Appearance}>
                   {TabName.Appearance}
-               </Tab>
-               <Tab disableIndicator value={TabName.Popup}>
-                   {TabName.Popup}
                </Tab>
                 <Tab disableIndicator value={TabName.App_Data}>
                     {TabName.App_Data}
                 </Tab>
-               <Tab disableIndicator value={TabName.Buttons}>
-                  Buttons
-               </Tab>
                <Tab disableIndicator value={TabName.Haptic}>
                   Haptic
                </Tab>
@@ -120,6 +119,12 @@ const Home = () => {
             <TabPanel value={TabName.App_Data}>
                 <TabContentAppData />
             </TabPanel>
+             <TabPanel value={TabName.Buttons}>
+                 <TabContentButtons />
+             </TabPanel>
+             <TabPanel value={TabName.Haptic}>
+                 <TabContentHaptic />
+             </TabPanel>
          </Tabs>
       </Box>
    );
