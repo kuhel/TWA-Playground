@@ -19,9 +19,10 @@ import WebApp from '@twa-dev/sdk';
 
 const Buttons = () => {
     const [open, setOpen] = useState(false);
-    const [mainButtonVisible, setMainButtonVisible] = useState(WebApp.MainButton.isVisible);
-    // @ts-ignore
-    const [backButtonVisible, setBackButtonVisible] = useState(WebApp.BackButton.isVisible);
+    const [mainButtonVisible, setMainButtonVisible] = useState(false);
+    WebApp.MainButton.hide();
+    const [backButtonVisible, setBackButtonVisible] = useState(false);
+    WebApp.BackButton.hide();
     const [snackbarMessage, setSnackbarMessage] = useState('Default');
     const [btnColor, setBtnColor] = useState(WebApp.themeParams.button_color);
     const [btnTextColor, setBtnTextColor] = useState(WebApp.themeParams.button_text_color);
