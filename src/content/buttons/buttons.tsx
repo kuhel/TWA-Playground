@@ -59,22 +59,18 @@ const Buttons = () => {
     };
 
     const handleMainButton= () => {
-        console.log('handleMainButton call');
         WebApp.MainButton.onClick(() => handleClick('Main Button click callback'));
         WebApp.MainButton.setParams({
             text: 'Show Snackbar'
         });
         WebApp.MainButton.show()
         setMainButtonVisible(true);
-        console.dir( WebApp.MainButton);
     };
 
     const handleBackButton= () => {
-        console.log('handleBackButton call');
         WebApp.BackButton.onClick(() => handleClick('Main Button click callback'));
         WebApp.BackButton.show();
         setBackButtonVisible(true);
-        console.dir( WebApp.BackButton);
     };
 
     const action = (
@@ -136,6 +132,13 @@ const Buttons = () => {
                         >
                             Hide
                         </Button>
+                    </ButtonGroup>
+                    <ButtonGroup
+                        size="sm"
+                        color="primary"
+                        aria-label="primary button group"
+                        sx={{ mt: 1 }}
+                    >
                         <Button
                             disabled={!mainButtonVisible}
                             onClick={() => WebApp.MainButton.showProgress()}
@@ -148,6 +151,13 @@ const Buttons = () => {
                         >
                             Hide Progress
                         </Button>
+                    </ButtonGroup>
+                    <ButtonGroup
+                        size="sm"
+                        color="primary"
+                        aria-label="primary button group"
+                        sx={{ mt: 1 }}
+                    >
                         <Button
                             disabled={!mainButtonVisible}
                             onClick={() => WebApp.MainButton.enable()}
@@ -162,7 +172,7 @@ const Buttons = () => {
                         </Button>
                     </ButtonGroup>
 
-                    <FormLabel>Background color</FormLabel>
+                    <FormLabel sx={{ mt: 1 }}>Background color</FormLabel>
                     <input type="color" id="btn_color" name="btn_color" value={btnColor} onChange={handleBtnColorChange}/>
                     <FormLabel sx={{ mt: 1 }}>Text color</FormLabel>
                     <input type="color" id="btn_text_color" name="btn_text_color" value={btnTextColor} onChange={handleBtnTextColorChange}/>
@@ -171,6 +181,7 @@ const Buttons = () => {
                     <Input
                         placeholder={btnText}
                         onChange={handleTextChange}
+                        sx={{ maxWidth: '75vw' }}
                         endDecorator={<Button
                             onClick={() => WebApp.MainButton.setText(btnText)}
                         >

@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 
-import i18n from 'common/language/i18n';
-
 import useTheme from 'hooks/useTheme';
 
 import { TabName } from 'store/slices/appSlice';
