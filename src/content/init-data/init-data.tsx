@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Box from '@mui/joy/Box';
 import List from '@mui/joy/List';
 import ListItem from '@mui/joy/ListItem';
@@ -12,6 +12,26 @@ import WebApp from '@twa-dev/sdk';
 const InitData = () => {
     const [open, setOpen] = useState(true);
     const [open2, setOpen2] = useState(false);
+    const [viewport, setViewport] = useState({
+        viewportHeight: WebApp.viewportHeight,
+        viewportStableHeight: WebApp.viewportStableHeight,
+    });
+
+    const handleViewportChanged = useCallback((event: { isStateStable: boolean; }) => {
+        if (event.isStateStable) {
+            WebApp.showAlert('Resizing is finished');
+            setViewport({
+                viewportHeight: WebApp.viewportHeight,
+                viewportStableHeight: WebApp.viewportStableHeight,
+            });
+        }
+    }, []);
+
+    useEffect(() => {
+        WebApp.onEvent('viewportChanged', handleViewportChanged);
+
+    }, [handleViewportChanged]);
+
     return (
         <Box
             sx={{
@@ -106,13 +126,13 @@ const InitData = () => {
                             <ListItem>
                                 <Typography level="inherit">Viewport Height: </Typography>
                                 <Typography component="span" level="body-sm" sx={{ ml: 1 }}>
-                                    {WebApp.viewportHeight}
+                                    {viewport.viewportHeight}
                                 </Typography>
                             </ListItem>
                             <ListItem>
                                 <Typography level="inherit">Viewport Stable Height: </Typography>
                                 <Typography component="span" level="body-sm" sx={{ ml: 1 }}>
-                                    {WebApp.viewportStableHeight}
+                                    {viewport.viewportStableHeight}
                                 </Typography>
                             </ListItem>
                         </List>
@@ -148,7 +168,7 @@ const InitData = () => {
                     {open2 && (
                         <List sx={{ '--ListItem-paddingY': '8px' }}>
                             <ListItem>
-                                <Typography level="inherit">{WebApp.initData}</Typography>
+                                <pre style={{whiteSpace: 'pre-wrap', overflowWrap: 'break-word',maxWidth: '100%'}}>{WebApp.initData}</pre>
                             </ListItem>
                         </List>
                     )}
