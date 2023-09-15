@@ -61,25 +61,27 @@ const Buttons = () => {
     };
 
     const handleMainButton= () => {
-        console.log('handleMainButton');
+        console.log('handleMainButton call');
         if (!mainButtonVisible) {
             WebApp.MainButton.onClick(() => handleClick('Main Button click callback'));
             WebApp.MainButton.setParams({
-                text: 'Show Snackbar',
-                is_visible: true
+                text: 'Show Snackbar'
             });
+            WebApp.MainButton.show()
             setMainButtonVisible(true);
         }
+        console.dir( WebApp.MainButton);
     };
 
     const handleBackButton= () => {
-        console.log('handleBackButton');
+        console.log('handleBackButton call');
         // @ts-ignore
         if (!backButtonVisible) {
             WebApp.BackButton.onClick(() => handleClick('Main Button click callback'));
             WebApp.BackButton.show();
             setBackButtonVisible(true);
         }
+        console.dir( WebApp.BackButton);
     };
 
     const action = (
@@ -94,9 +96,6 @@ const Buttons = () => {
             </IconButton>
         </Fragment>
     );
-
-    console.log(WebApp.MainButton);
-    console.log(WebApp.BackButton);
 
     return (
         <Box>
