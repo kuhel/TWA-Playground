@@ -6,7 +6,6 @@ import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/joy/Button';
 import ButtonGroup from '@mui/joy/ButtonGroup';
-import Input from '@mui/joy/Input';
 import Divider from '@mui/material/Divider';
 
 import Launch from '@mui/icons-material/Launch';
@@ -19,12 +18,7 @@ import WebApp from '@twa-dev/sdk';
 
 const Haptic = () => {
     const [open, setOpen] = useState(false);
-    const [mainButtonVisible, setMainButtonVisible] = useState(WebApp.MainButton.isVisible);
-    const [backButtonVisible, setBackButtonVisible] = useState(WebApp.BackButton.isVisible);
     const [snackbarMessage, setSnackbarMessage] = useState('Default');
-    const [btnColor, setBtnColor] = useState(WebApp.themeParams.button_color);
-    const [btnTextColor, setBtnTextColor] = useState(WebApp.themeParams.button_text_color);
-    const [btnText, setBtnText] = useState(WebApp.MainButton.text);
 
     const handleClick = (message: string) => {
         setSnackbarMessage(message);
@@ -37,43 +31,6 @@ const Haptic = () => {
         }
 
         setOpen(false);
-    };
-
-    const handleBtnColorChange = (event: any) => {
-        setBtnColor(event.currentTarget.value);
-        WebApp.MainButton.setParams({
-            color: event.currentTarget.value
-        });
-    };
-
-    const handleTextChange = (event: any) => {
-        setBtnText(event.currentTarget.value)
-    };
-
-    const handleBtnTextColorChange = (event: any) => {
-        setBtnTextColor(event.currentTarget.value);
-        WebApp.MainButton.setParams({
-            text_color: event.currentTarget.value
-        });
-    };
-
-    const handleMainButton= () => {
-        if (!WebApp.MainButton.isVisible) {
-            WebApp.MainButton.onClick(() => handleClick('Main Button click callback'));
-            WebApp.MainButton.setParams({
-                text: 'Show Snackbar',
-                is_visible: true
-            });
-            setMainButtonVisible(true);
-        }
-    };
-
-    const handleBackButton= () => {
-        if (!WebApp.BackButton.isVisible) {
-            WebApp.BackButton.onClick(() => handleClick('Main Button click callback'));
-            WebApp.BackButton.show();
-            setBackButtonVisible(true);
-        }
     };
 
     const action = (
