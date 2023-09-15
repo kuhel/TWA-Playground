@@ -62,25 +62,20 @@ const Buttons = () => {
 
     const handleMainButton= () => {
         console.log('handleMainButton call');
-        if (!mainButtonVisible) {
-            WebApp.MainButton.onClick(() => handleClick('Main Button click callback'));
-            WebApp.MainButton.setParams({
-                text: 'Show Snackbar'
-            });
-            WebApp.MainButton.show()
-            setMainButtonVisible(true);
-        }
+        WebApp.MainButton.onClick(() => handleClick('Main Button click callback'));
+        WebApp.MainButton.setParams({
+            text: 'Show Snackbar'
+        });
+        WebApp.MainButton.show()
+        setMainButtonVisible(true);
         console.dir( WebApp.MainButton);
     };
 
     const handleBackButton= () => {
         console.log('handleBackButton call');
-        // @ts-ignore
-        if (!backButtonVisible) {
-            WebApp.BackButton.onClick(() => handleClick('Main Button click callback'));
-            WebApp.BackButton.show();
-            setBackButtonVisible(true);
-        }
+        WebApp.BackButton.onClick(() => handleClick('Main Button click callback'));
+        WebApp.BackButton.show();
+        setBackButtonVisible(true);
         console.dir( WebApp.BackButton);
     };
 
