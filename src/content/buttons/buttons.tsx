@@ -61,7 +61,8 @@ const Buttons = () => {
     };
 
     const handleMainButton= () => {
-        if (!WebApp.MainButton.isVisible) {
+        console.log('handleMainButton');
+        if (!mainButtonVisible) {
             WebApp.MainButton.onClick(() => handleClick('Main Button click callback'));
             WebApp.MainButton.setParams({
                 text: 'Show Snackbar',
@@ -72,8 +73,9 @@ const Buttons = () => {
     };
 
     const handleBackButton= () => {
+        console.log('handleBackButton');
         // @ts-ignore
-        if (!WebApp.BackButton.isVisible) {
+        if (!backButtonVisible) {
             WebApp.BackButton.onClick(() => handleClick('Main Button click callback'));
             WebApp.BackButton.show();
             setBackButtonVisible(true);
@@ -92,6 +94,9 @@ const Buttons = () => {
             </IconButton>
         </Fragment>
     );
+
+    console.log(WebApp.MainButton);
+    console.log(WebApp.BackButton);
 
     return (
         <Box>
@@ -166,9 +171,6 @@ const Buttons = () => {
                         </Button>
                     </ButtonGroup>
 
-                    <Typography level="title-lg" textAlign="left" sx={{ mt: 2 }}>
-                        Appearance
-                    </Typography>
                     <FormLabel>Background color</FormLabel>
                     <input type="color" id="btn_color" name="btn_color" value={btnColor} onChange={handleBtnColorChange}/>
                     <FormLabel sx={{ mt: 1 }}>Text color</FormLabel>
