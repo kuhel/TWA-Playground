@@ -127,7 +127,6 @@ const Buttons = () => {
                         size="sm"
                         color="primary"
                         aria-label="primary button group"
-                        disabled
                     >
                         <Button
                             disabled={mainButtonVisible}
@@ -221,7 +220,6 @@ const Buttons = () => {
                         size="sm"
                         color="primary"
                         aria-label="primary button group"
-                        disabled
                     >
                         <Button
                             disabled={backButtonVisible}
